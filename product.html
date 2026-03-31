@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nairobi Nights 22" Body Wave | Eucken House of Wigs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pdp-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin: 40px auto 80px;
+        }
+
+        /* Gallery */
+        .gallery-main {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .gallery-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: zoom-in;
+        }
+        .gallery-thumbs {
+            display: flex;
+            gap: 15px;
+        }
+        .gallery-thumbs .thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+        .gallery-thumbs .thumb.active {
+            border-color: var(--primary-gold);
+        }
+        .gallery-thumbs img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Product Info */
+        .product-meta {
+            margin-bottom: 30px;
+        }
+        .product-meta h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .reviews-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        .stars { color: #ffb400; font-size: 16px; }
+        .price-box {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--secondary-burgundy);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .price-box .old-price {
+            font-size: 20px;
+            color: #999;
+            text-decoration: line-through;
+            font-weight: 400;
+        }
+        .price-box .save-badge {
+            background-color: var(--cta-coral);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        /* Stock Urgency */
+        .urgency-box {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px 15px;
+            margin-bottom: 30px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #856404;
+        }
+
+        /* Variants */
+        .variant-group { margin-bottom: 25px; }
+        .variant-title {
+            font-family: var(--font-body);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .size-guide-link {
+            color: var(--cta-coral);
+            text-decoration: underline;
+            font-weight: 400;
+            cursor: pointer;
+        }
+
+        .variant-options { display: flex; gap: 10px; flex-wrap: wrap; }
+        
+        /* Length Chips */
+        .chip {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .chip:hover { border-color: var(--primary-gold); }
+        .chip.selected {
+            border-color: var(--primary-gold);
+            background-color: var(--neutral-cream);
+            font-weight: bold;
+            color: var(--secondary-burgundy);
+        }
+
+        /* Color Swatches */
+        .swatch {
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            outline: 1px solid #ddd; outline-offset: 2px;
+        }
+        .swatch.selected { outline-color: var(--primary-gold); border-color: white; }
+
+        /* Actions */
+        .action-row {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .qty-picker {
+            display: flex;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            overflow: hidden;
+            width: 120px;
+        }
+        .qty-btn {
+            background: #f9f9f9;
+            border: none;
+            width: 40px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .qty-input {
+            width: 40px;
+            text-align: center;
+            border: none;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            font-family: var(--font-body);
+        }
+        .btn-add-cart {
+            flex: 1;
+            height: 50px;
+            font-size: 18px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            margin-top: 50px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            gap: 30px;
+        }
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 15px 0;
+            font-size: 16px;
+            font-family: var(--font-body);
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            position: relative;
+        }
+        .tab-btn.active {
+            color: var(--secondary-burgundy);
+            font-weight: 600;
+        }
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; width: 100%; height: 2px;
+            background-color: var(--secondary-burgundy);
+        }
+        .tab-content {
+            padding: 30px 0;
+            color: #555;
+            line-height: 1.8;
+            display: none;
+        }
+        .tab-content.active { display: block; }
+        .tab-content ul { list-style: disc; margin-left: 20px; margin-bottom: 20px; }
+
+        /* Complete the Look */
+        .upsell-section { margin-top: 80px; margin-bottom: 80px; }
+
+        @media (max-width: 992px) {
+            .pdp-container { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        Free Delivery in Nairobi for Orders over KSh 5,000 | 30-Day Money-Back Guarantee
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    Eucken <br><span>House of Wigs</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="shop.html">Shop All</a></li>
+                    <li><a href="#">Lace Fronts</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <button aria-label="Cart" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Breadcrumb -->
+        <div style="padding: 20px 0; font-size: 14px; color: #666;">
+            <a href="index.html">Home</a> &gt; <a href="shop.html">Shop All</a> &gt; <span>Nairobi Nights 22" Body Wave</span>
+        </div>
+
+        <!-- PDP Layout -->
+        <div class="pdp-container">
+            <!-- Left: Gallery -->
+            <div>
+                <div class="gallery-main">
+                    <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?q=80&w=1500&auto=format&fit=crop" id="mainImage" alt="Nairobi Nights Wig Front View">
+                </div>
+                <div class="gallery-thumbs">
+                    <div class="thumb active" onclick="document.getElementById('mainImage').src=this.querySelector('img').src">
+                        <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?q=80&w=1500&auto=format&fit=crop" alt="Front">
+                    </div>
+                    <div class="thumb" onclick="document.getElementById('mainImage').src=this.querySelector('img').src">
+                        <img src="https://images.unsplash.com/photo-1549416550-93717df392cb?q=80&w=500&auto=format&fit=crop" alt="Side">
+                    </div>
+                    <div class="thumb" onclick="document.getElementById('mainImage').src=this.querySelector('img').src">
+                        <img src="https://images.unsplash.com/photo-1580618672591-eb180b1a973f?q=80&w=500&auto=format&fit=crop" alt="Detail">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Info -->
+            <div>
+                <div class="product-meta">
+                    <h1>Nairobi Nights 22" Body Wave Lace Front</h1>
+                    
+                    <div class="reviews-badge">
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <a href="#reviews" style="color: #666; text-decoration: underline;">124 Reviews</a>
+                        <span style="color: #ccc;">|</span>
+                        <span style="color: #28a745; font-weight: 600;"><i class="fa-solid fa-check"></i> In Stock</span>
+                    </div>
+                    
+                    <div class="price-box">
+                        KSh 7,500 
+                        <span class="old-price">KSh 9,000</span>
+                        <span class="save-badge">Save KSh 1,500</span>
+                    </div>
+
+                    <p style="color: #555; margin-bottom: 20px;">
+                        Channel pure elegance with our Nairobi Nights body wave wig. Featuring a pre-plucked 13x4 HD lace front for the most seamless melt, giving you that 'scalp' effect effortlessly.
+                    </p>
+                </div>
+
+                <div class="urgency-box">
+                    <i class="fa-solid fa-fire"></i> High Demand! Only 3 left in stock at this price.
+                </div>
+
+                <!-- Variants -->
+                <div class="variant-group">
+                    <div class="variant-title">
+                        <span>Length: 22 Inches</span>
+                        <span class="size-guide-link"><i class="fa-solid fa-ruler"></i> Size Guide</span>
+                    </div>
+                    <div class="variant-options">
+                        <div class="chip">18"</div>
+                        <div class="chip">20"</div>
+                        <div class="chip selected">22"</div>
+                        <div class="chip">24" (+KSh 1,000)</div>
+                    </div>
+                </div>
+
+                <div class="variant-group">
+                    <div class="variant-title">Color: Natural Black (1B)</div>
+                    <div class="variant-options">
+                        <div class="swatch selected" style="background-color: #1a1a1a;" title="Natural Black"></div>
+                        <div class="swatch" style="background-color: #3b2f2f;" title="Dark Brown"></div>
+                        <div class="swatch" style="background-color: #722f37;" title="Burgundy Highlight"></div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="action-row">
+                    <div class="qty-picker">
+                        <button class="qty-btn" onclick="document.getElementById('qty').value = Math.max(1, document.getElementById('qty').value - 1)">-</button>
+                        <input type="number" id="qty" class="qty-input" value="1" min="1">
+                        <button class="qty-btn" onclick="document.getElementById('qty').value = parseInt(document.getElementById('qty').value) + 1">+</button>
+                    </div>
+                    <button class="btn btn-primary btn-add-cart" onclick="alert('Added to cart!'); document.querySelector('.cart-count').textContent = '3';">Add to Cart - KSh 7,500</button>
+                    <button class="btn btn-secondary" style="width: 50px; padding: 0; display: flex; align-items: center; justify-content: center;"><i class="fa-regular fa-heart"></i></button>
+                </div>
+
+                <div style="padding: 15px; border: 1px solid #eee; border-radius: var(--border-radius-sm); font-size: 14px; color: #555;">
+                    <div style="margin-bottom: 10px;"><i class="fa-solid fa-truck" style="width: 20px; color: var(--primary-gold);"></i> Delivery within 24hrs in Nairobi</div>
+                    <div style="margin-bottom: 10px;"><i class="fa-solid fa-rotate-left" style="width: 20px; color: var(--primary-gold);"></i> 30-Day Money Back Guarantee</div>
+                    <div><i class="fa-solid fa-lock" style="width: 20px; color: var(--primary-gold);"></i> Secure checkout (M-Pesa & Cards)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Description Tabs -->
+        <div>
+            <div class="tabs">
+                <button class="tab-btn active" onclick="openTab('overview', this)">Overview</button>
+                <button class="tab-btn" onclick="openTab('specs', this)">Specifications</button>
+                <button class="tab-btn" onclick="openTab('care', this)">Care Instructions</button>
+                <button class="tab-btn" onclick="openTab('shipping', this)">Shipping & Returns</button>
+            </div>
+
+            <div id="overview" class="tab-content active">
+                <h3 style="margin-bottom: 15px;">Why You'll Love It</h3>
+                <ul>
+                    <li><strong>Pre-plucked Hairline:</strong> Arrives ready-to-wear with a natural customized hairline.</li>
+                    <li><strong>HD Lace Technology:</strong> Our ultra-thin lace melts seamlessly into any skin tone.</li>
+                    <li><strong>Voluminous Body Wave:</strong> Holds its bounce beautifully, can be straightened or restyled.</li>
+                    <li><strong>Beginner Friendly:</strong> Glueless installation capable, with adjustable straps for the perfect fit.</li>
+                </ul>
+            </div>
+            <div id="specs" class="tab-content">
+                <ul>
+                    <li><strong>Length:</strong> 22 inches (stretched)</li>
+                    <li><strong>Density:</strong> 150% (Natural volume)</li>
+                    <li><strong>Material:</strong> Premium Human Hair Blend (Heat styling up to 180°C)</li>
+                    <li><strong>Lace Area:</strong> 13x4 Frontal</li>
+                    <li><strong>Cap Size:</strong> Medium (22.5" circumference), adjustable</li>
+                </ul>
+            </div>
+            <div id="care" class="tab-content">
+                <p>Wash gently using sulfate-free shampoo in lukewarm water. Do not rub the hair. Apply conditioner from mid-lengths to ends. Detangle while wet using a wide-tooth comb starting from the ends. Let it air dry on a wig stand. Store in the Eucken silk bag provided when not in use.</p>
+            </div>
+            <div id="shipping" class="tab-content">
+                <p><strong>Nairobi Delivery:</strong> Same-day delivery for orders placed before 2 PM (KSh 300). Free delivery for orders over KSh 5,000.</p>
+                <p><strong>Outside Nairobi:</strong> 24-48 hours via Fargo Courier (KSh 500).</p>
+                <p><strong>Returns:</strong> We accept returns for unworn widgets with uncut lace within 30 days of purchase.</p>
+            </div>
+        </div>
+
+        <!-- Upsell Component -->
+        <div class="upsell-section">
+            <h2 class="section-title">Complete The Look</h2>
+            <div class="products-grid" style="grid-template-columns: repeat(4, 1fr);">
+                <!-- Upsell 1 -->
+                <div class="product-card" style="box-shadow: none; border: 1px solid #eee;">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=500&auto=format&fit=crop" alt="Wig Cap"></div>
+                    <div class="product-details" style="padding: 15px;">
+                        <div class="product-title" style="font-size: 14px;">HD Wig Cap (2 Pack)</div>
+                        <div class="product-price" style="font-size: 16px;">KSh 500</div>
+                        <button class="btn btn-secondary" style="width: 100%; padding: 8px;">Add</button>
+                    </div>
+                </div>
+                <!-- Upsell 2 -->
+                <div class="product-card" style="box-shadow: none; border: 1px solid #eee;">
+                    <div class="product-image"><img src="https://images.unsplash.com/photo-1546842931-886c185b4c8c?q=80&w=500&auto=format&fit=crop" alt="Edge Control"></div>
+                    <div class="product-details" style="padding: 15px;">
+                        <div class="product-title" style="font-size: 14px;">24HR Hold Edge Control</div>
+                        <div class="product-price" style="font-size: 16px;">KSh 850</div>
+                        <button class="btn btn-secondary" style="width: 100%; padding: 8px;">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="footer-logo">Eucken House of Wigs</a>
+                    <p class="footer-desc">Empowering the modern woman with affordable luxury. Slay on a budget in Nairobi, Kenya.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2025 Eucken House of Wigs. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        function openTab(tabId, btnElement) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            btnElement.classList.add('active');
+        }
+    </script>
+</body>
+</html>

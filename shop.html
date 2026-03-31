@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Eucken House of Wigs</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .shop-container {
+            display: flex;
+            gap: 40px;
+            margin: 40px auto;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            flex-shrink: 0;
+            background: white;
+            padding: 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            height: fit-content;
+        }
+
+        .filter-group {
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--neutral-gray);
+            padding-bottom: 15px;
+        }
+        .filter-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .filter-group h4 {
+            font-family: var(--font-body);
+            font-size: 16px;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        .checkbox-item input {
+            cursor: pointer;
+        }
+
+        .price-range {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .price-range input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        /* Main Content */
+        .shop-main {
+            flex: 1;
+        }
+        
+        .shop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius-md);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .sort-by select {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--border-radius-sm);
+            background: white;
+            font-family: var(--font-body);
+            cursor: pointer;
+        }
+
+        /* Product Grid adjustments for Sidebar layout */
+        .shop-main .products-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media (max-width: 992px) {
+            .shop-container { flex-direction: column; }
+            .sidebar { width: 100%; }
+        }
+        @media (max-width: 768px) {
+            .shop-main .products-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 576px) {
+            .shop-main .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <div class="top-bar">
+        Free Delivery in Nairobi for Orders over KSh 5,000 | 30-Day Money-Back Guarantee
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-inner">
+            <div class="logo">
+                <a href="index.html">
+                    Eucken <br><span>House of Wigs</span>
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="shop.html" style="color: var(--primary-gold);">Shop All</a></li>
+                    <li><a href="#">Lace Fronts</a></li>
+                    <li><a href="#">Short Styles</a></li>
+                    <li><a href="#">Colored Wigs</a></li>
+                    <li><a href="#">Size & Fit Guide</a></li>
+                    <li><a href="#" style="color: var(--cta-coral); font-weight: bold;">Sale</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <button aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button aria-label="User Account"><i class="fa-regular fa-user"></i></button>
+                <button aria-label="Wishlist"><i class="fa-regular fa-heart"></i></button>
+                <button aria-label="Cart" class="cart-btn">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-count">2</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Breadcrumbs -->
+        <div style="padding: 20px 0; font-size: 14px; color: #666;">
+            <a href="index.html">Home</a> &gt; <span>Shop All</span>
+        </div>
+
+        <div class="shop-container">
+            <!-- Sidebar Filters -->
+            <aside class="sidebar">
+                <div class="filter-group">
+                    <h4>Stock Status <i class="fa-solid fa-chevron-down"></i></h4>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" checked> In Stock</label>
+                        <label class="checkbox-item"><input type="checkbox"> Out of Stock</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Price Range <i class="fa-solid fa-chevron-down"></i></h4>
+                    <div class="price-range">
+                        <input type="number" placeholder="Min KSh">
+                        <span>-</span>
+                        <input type="number" placeholder="Max KSh">
+                    </div>
+                    <button class="btn btn-primary" style="width: 100%; padding: 8px; margin-top: 10px; font-size: 14px;">Apply</button>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Length <i class="fa-solid fa-chevron-down"></i></h4>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox"> Short (8"-12")</label>
+                        <label class="checkbox-item"><input type="checkbox"> Medium (14"-18")</label>
+                        <label class="checkbox-item"><input type="checkbox"> Long (20"-26")</label>
+                        <label class="checkbox-item"><input type="checkbox"> Extra Long (28"+)</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Texture <i class="fa-solid fa-chevron-down"></i></h4>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox"> Straight</label>
+                        <label class="checkbox-item"><input type="checkbox"> Body Wave</label>
+                        <label class="checkbox-item"><input type="checkbox"> Curly</label>
+                        <label class="checkbox-item"><input type="checkbox"> Afro Kinky</label>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h4>Type <i class="fa-solid fa-chevron-down"></i></h4>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox"> Lace Front</label>
+                        <label class="checkbox-item"><input type="checkbox"> Headband Wigs</label>
+                        <label class="checkbox-item"><input type="checkbox"> U-Part Wigs</label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Shop Area -->
+            <div class="shop-main">
+                <div class="shop-header">
+                    <div style="font-size: 14px; color: #666;">
+                        Showing 1-12 of 156 wigs
+                    </div>
+                    <div class="sort-by">
+                        <label for="sort" style="margin-right: 10px; font-size: 14px;">Sort by:</label>
+                        <select id="sort">
+                            <option>Popularity</option>
+                            <option>Price: Low to High</option>
+                            <option>Price: High to Low</option>
+                            <option>Newest Arrivals</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card">
+                        <div class="badge">Hot</div>
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1492106087820-71f1a00d2b11?q=80&w=1000&auto=format&fit=crop" alt="Nairobi Nights Body Wave">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">Nairobi Nights 22" Body Wave Lace Front</div>
+                            <div class="product-price">KSh 7,500 <span class="original-price">KSh 9,000</span></div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="product-card">
+                        <div class="badge" style="background-color: var(--secondary-purple);">New</div>
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1617013892780-60b540fc6a44?q=80&w=1000&auto=format&fit=crop" alt="Sleek Straight Bob">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">"The Boss Lady" 12" Sleek Straight Bob</div>
+                            <div class="product-price">KSh 4,500</div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="product-card">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1549416550-93717df392cb?q=80&w=1000&auto=format&fit=crop" alt="Burgundy Dream">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">Burgundy Dream 18" Body Wave Highlight</div>
+                            <div class="product-price">KSh 6,200</div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                    <!-- Product 4 -->
+                    <div class="product-card">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1595152452543-e5fc28ebc2b8?q=80&w=1000&auto=format&fit=crop" alt="Afro Kinky">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">Natural Afro Kinky Curly Headband Wig</div>
+                            <div class="product-price">KSh 3,800</div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                    <!-- Product 5 -->
+                    <div class="product-card">
+                        <div class="badge" style="background-color: var(--cta-coral);">Sale</div>
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=1000&auto=format&fit=crop" alt="Long Straight Lace Front">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">Vixen 26" Silhouette Bone Straight Lace Front</div>
+                            <div class="product-price">KSh 10,500 <span class="original-price">KSh 13,000</span></div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                    <!-- Product 6 -->
+                    <div class="product-card">
+                        <button class="wishlist-btn"><i class="fa-regular fa-heart"></i></button>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1620958189569-b1d31df2574e?q=80&w=1000&auto=format&fit=crop" alt="Blonde Highlight Bob">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title">Sun-Kissed Blonde Highlights 14" Bob</div>
+                            <div class="product-price">KSh 5,800</div>
+                            <button class="add-to-cart-btn" onclick="window.location='product.html'">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <div style="display: flex; justify-content: center; margin-top: 40px; gap: 10px;">
+                    <button class="btn btn-secondary" style="padding: 10px 15px;">&laquo; Prev</button>
+                    <button class="btn btn-primary" style="padding: 10px 15px;">1</button>
+                    <button class="btn btn-secondary" style="padding: 10px 15px;">2</button>
+                    <button class="btn btn-secondary" style="padding: 10px 15px;">3</button>
+                    <span style="padding: 10px 15px;">...</span>
+                    <button class="btn btn-secondary" style="padding: 10px 15px;">13</button>
+                    <button class="btn btn-secondary" style="padding: 10px 15px;">Next &raquo;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="index.html" class="footer-logo">Eucken House of Wigs</a>
+                    <p class="footer-desc">Empowering the modern woman with affordable luxury. Slay on a budget with our premium quality wigs in Nairobi, Kenya.</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2025 Eucken House of Wigs. All Rights Reserved.</div>
+            </div>
+        </div>
+    </footer>
+    <script src="main.js"></script>
+</body>
+</html>
